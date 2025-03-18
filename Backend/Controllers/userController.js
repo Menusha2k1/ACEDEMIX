@@ -20,8 +20,7 @@ exports.login = async (req, res) => {
             expiresIn: "36000m",
         });
 
-        // Store user's name in local storage
-        localStorage.setItem('userName', userInfo.name);
+       
 
         return res.json({ error: false, message: "Login successful", email, accessToken, name: userInfo.name});
     } else {
@@ -49,8 +48,6 @@ exports.createAccount = async (req, res) => {
         expiresIn: "36000m",
     });
 
-    // Store user's name in local storage
-    localStorage.setItem("userName", name);
 
     return res.json({ error: false, user, accessToken, message: "Registration successful", name: user.name });
 };
