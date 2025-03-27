@@ -10,8 +10,12 @@ import calender from '../../assets/calender.png'
 import pic3 from '../../assets/pic3.png'
 import Footer from '../../components/Footer/footer'
 import Slider from '../../components/Slideshow/slideshow'
+import { useNavigate } from 'react-router-dom';
+
 
 const Home = () => {
+  const navigate = useNavigate();
+
   return (
     
     <div>
@@ -32,9 +36,9 @@ const Home = () => {
           <img src={note} alt=""  className=' top-7'/>
           <p className='text-sm text-center font-medium'>Acedemic Reminder</p>
         </div>
-        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
+        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 ' onClick={() => navigate('/quiz')}>
           <img src={note} alt=""  className=' top-7'/>
-          <p className='text-xl font-medium text-center '>AI quiz</p>
+          <p className='text-xl font-medium text-center' >AI quiz</p>
         </div>
         <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
           <img src={note} alt=""  className=' top-7'/>LiveNote

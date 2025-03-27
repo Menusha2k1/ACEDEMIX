@@ -8,7 +8,6 @@ import {useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [userName, setUserName] = useState('');
 
   const isAuthenticated = !!localStorage.getItem('token');
   const navigate = useNavigate();
