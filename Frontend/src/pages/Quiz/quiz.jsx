@@ -54,7 +54,7 @@ export default function QuizApp() {
         setScore(correctAnswers);
         setSubmitted(true);
     };
-
+    
     return (
 
         <div className="max-w-2xl mx-auto p-6 mt-20"> <Navbar />
@@ -70,14 +70,20 @@ export default function QuizApp() {
                 onChange={(e) => setLectureNotes(e.target.value)}
             ></textarea>
             
-
+            {!quiz? 
             <button
                 className="mt-4 bg-blue-500 text-white px-4 py-2 rounded flex"
                 onClick={() => { generateQuiz(); Loading() }}
 
             >
                 <BsStars /> Generate Quiz
-            </button>
+            </button>: <button
+                className="mt-4 bg-blue-500 text-white px-4 py-2 rounded flex"
+                onClick={() => { generateQuiz(); Loading() }}
+
+            >
+                <BsStars /> new quiz
+            </button>}
             {loader &&
                <div>
                <div className="flex mt-20 animate-pulse  items-center justify-center text-3xl  text-blue-400"><BsStars />Generating Quiz<BsStars /> ....</div>
