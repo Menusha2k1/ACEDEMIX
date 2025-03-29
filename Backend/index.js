@@ -1,17 +1,22 @@
 require("dotenv").config();
 
-
 const config = require("./config.json");
 const mongoose = require("mongoose");
 
 mongoose.connect(config.connectionString);
 
 const authRoutes = require("./Routes/userRoutes");
+const quizRoutes = require("./Routes/quizRouter")
+
 
 const express = require("express");
-const cors = require("cors");
 const app = express();
+app.use(express.json());
 
+const cors = require("cors");
+app.use(cors());
+
+app.use('/api/quiz', quizRoutes);
 
 
 app.use(express.json());
