@@ -6,7 +6,7 @@ const generateQuiz = async (req, res) => {
     const {lectureNotes} = req.body;
 
    
-    console.log(lectureNotes);
+
     try {
         // 1. Verify API Key
         if (!process.env.DEEPSEEK_API_KEY) {
