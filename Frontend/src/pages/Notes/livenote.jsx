@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from '../../components/Navbar/navbar';
 import Footer from '../../components/Footer/footer';
-import RichTextEditor from '../../components/RichTextEditor/RichTextEditor';
+import RichTextEditor from '../../components/RichTextEditor/richtesteditor';
 import VideoFile from '../../assets/notes.mp4'; // Ensure the path is correct
 import { MdAdd } from 'react-icons/md';
 

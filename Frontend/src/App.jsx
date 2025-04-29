@@ -4,12 +4,13 @@ import Login from './pages/Login/Login'
 import Signup from './pages/SignUp/signup'
 import Quiz from './pages/Quiz/quiz'
 import Image from './pages/ImageToText/imageToText'
-import LiveNote from './pages/LiveNote/liveNote'
-import LiveCol from './pages/liveCol/liveCol'
+import LiveNote from './pages/Notes/livenote'
+import LiveCol from './pages/Notes/liveCol'
 import ClassNotes from './pages/Notes/classNotes'
-import MindMapping from './pages/MindMapping/mindmapping'
-import MapGetStart from './pages/MindMapping/mapGetStart'
+import MindMapping from './pages/Notes/mindmapping'
+import MapGetStart from './pages/Notes/mapGetStart'
 import MyNotes from './pages/Notes/myNotes'
+
 import {BrowserRouter as Router,Routes,Route } from "react-router-dom";
 
 const routes = (
