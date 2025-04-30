@@ -1,0 +1,19 @@
+import Calendar from './components/Calendar';
+import {BrowserRouter as Router,Routes, Route} from "react-router-dom"
+
+function App() {
+  return (
+  <Router>
+    <div>
+      
+      <Routes>
+      <Route path="/" element={<Calendar />} />
+      </Routes>
+      
+    </div>
+    </Router>
+  ); 
+}
+
+export default App;
+ 
