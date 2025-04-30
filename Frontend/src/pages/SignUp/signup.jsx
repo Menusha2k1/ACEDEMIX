@@ -47,7 +47,7 @@ const signup = () => {
             if(error.response && error.response.data && error.response.data.message){
                 setError(error.response.data.message);
             }else{
-                setError("dslijfhmuodius1111111111111111111111")
+                setError("Error")
             }
     }
 

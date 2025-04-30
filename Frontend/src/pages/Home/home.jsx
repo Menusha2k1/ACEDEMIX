@@ -40,12 +40,7 @@ const Home = () => {
           <img src={note} alt="" className=' top-7' />
           <p className='text-xl font-medium text-center' >AI quiz</p>
         </div>
-        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-8 ' onClick={() => navigate('/image-to-text')}>
-          <img src={note} alt="" className=' top-7' />Text Extractor
-        </div>
-        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
-          <img src={note} alt="" className=' top-7' />LiveNote
-        </div>
+  
 
 
 
