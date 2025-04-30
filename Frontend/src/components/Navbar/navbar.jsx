@@ -54,7 +54,7 @@ const Navbar = () => {
               <div className="absolute top-full left-0 bg-white shadow-lg rounded mt-2 py-2 w-48">
                 <ul>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer hover:text-red-500 ">Text Extractor</li>
-                  <Link to="/livenote">
+                  <Link to="/liveCol">
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Live note</li>
                   </Link>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Stiky notes</li>
@@ -96,7 +96,7 @@ const Navbar = () => {
 
        {!isAuthenticated? 
         <button className='btn-primary flex  text-4xl'
-        onClick={() => { navigate('/login')}}>
+        onClick={() => { navigate('/livenote') }}>
       Start Note
       <IoPencil 
       size={20}
