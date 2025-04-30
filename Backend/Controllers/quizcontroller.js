@@ -61,7 +61,7 @@ const generateQuiz = async (req, res) => {
                     'HTTP-Referer': 'http://localhost:3000',
                     'X-Title': 'Quiz Generator'
                 },
-                timeout: 30000
+                timeout: 60000
             }
         );
 
