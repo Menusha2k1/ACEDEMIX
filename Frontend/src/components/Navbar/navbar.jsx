@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import {useNavigate } from 'react-router-dom';
 
 
+
 const Navbar = () => {
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -53,7 +54,9 @@ const Navbar = () => {
               <div className="absolute top-full left-0 bg-white shadow-lg rounded mt-2 py-2 w-48">
                 <ul>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer hover:text-red-500 ">Text Extractor</li>
+                  <Link to="/livenote">
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Live note</li>
+                  </Link>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Stiky notes</li>
                   <li className="px-4 py-2 hover:bg-gray-100 cursor-pointer">Acedemic reminder</li>
                 </ul>
