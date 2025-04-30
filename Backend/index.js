@@ -32,6 +32,6 @@ app.get("/", (req, res) => {
 
 //create account
 app.use("/", authRoutes);
-app.listen(8000);
+app.listen(4000);
 
 module.exports = app;

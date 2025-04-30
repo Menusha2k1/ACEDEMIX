@@ -3,9 +3,9 @@ require('dotenv').config();
 const Quiz = require('../Models/quiz_model');
 
 const generateQuiz = async (req, res) => {
-    const {lectureNotes} = req.body;
+    const { lectureNotes } = req.body;
 
-   
+
 
     try {
         // 1. Verify API Key
@@ -17,18 +17,18 @@ const generateQuiz = async (req, res) => {
         const prompt = `Generate exactly 10 multiple choice questions in JSON format based on these prompt:
         ${lectureNotes}
 
-        Return ONLY this exact JSON format with NO additional text or Markdown:
-        {
-          "title": " ... ",
-          "questions": [
-            {
-              "question": "...",
-              "options": ["A. Option1", "B. Option2", "C. Option3", "D. Option4"],
-              "answer": "A",
-              "explanation": "..."
-            }
-          ]
-        }`;
+        Return ONLY this exact JSON format with NO additional text or Markdown:keep the jason headers as it is
+                {
+            "title": "Quiz Title",
+            "questions": [
+                {
+                "question": "Question text?",
+                "options": ["A. Option1", "B. Option2", "C. Option3", "D. Option4"],
+                "answer": "A",
+                "explanation": "Detailed explanation"
+                }
+            ]
+            }`;
 
         // 3. Make the API request
         const response = await axios.post(
@@ -36,18 +36,18 @@ const generateQuiz = async (req, res) => {
             {
                 model: "deepseek/deepseek-r1:free",
                 messages: [
-                    { 
-                        role: "system", 
-                        content: `You are a JSON quiz generator. STRICTLY return ONLY the requested JSON object with:
+                    {
+                        role: "system",
+                        content: `content: ... Return ONLY valid JSON with a "questions" array key (not "question") ...
                         - Exactly 10 questions
                         - No additional commentary
                         - No Markdown formatting
                         - Valid JSON syntax
                         - All fields completed`
                     },
-                    { 
-                        role: "user", 
-                        content: prompt 
+                    {
+                        role: "user",
+                        content: prompt
                     }
                 ],
                 temperature: 0.3, // Lower temperature for more consistent results
@@ -61,7 +61,7 @@ const generateQuiz = async (req, res) => {
                     'HTTP-Referer': 'http://localhost:3000',
                     'X-Title': 'Quiz Generator'
                 },
-                timeout: 60000
+                timeout: 30000
             }
         );
 
@@ -78,7 +78,7 @@ const generateQuiz = async (req, res) => {
         if (rawContent.includes('```json')) {
             const jsonMatch = rawContent.match(/```json([\s\S]*?)```/);
             if (jsonMatch) jsonString = jsonMatch[1].trim();
-        } 
+        }
         // Extract JSON from text if needed
         else if (!rawContent.trim().startsWith('{')) {
             const jsonStart = rawContent.indexOf('{');
@@ -92,11 +92,11 @@ const generateQuiz = async (req, res) => {
         let quizData;
         try {
             quizData = JSON.parse(jsonString);
-            
+
             if (!quizData.questions || !Array.isArray(quizData.questions)) {
                 throw new Error("Missing questions array in response");
             }
-            
+
             if (quizData.questions.length !== 10) {
                 throw new Error(`Expected 10 questions, got ${quizData.questions.length}`);
             }
@@ -104,10 +104,10 @@ const generateQuiz = async (req, res) => {
             // Validate each question
             quizData.questions.forEach((q, i) => {
                 if (!q.question || !q.options || !q.answer || !q.explanation) {
-                    throw new Error(`Question ${i+1} missing required fields`);
+                    throw new Error(`Question ${i + 1} missing required fields`);
                 }
                 if (q.options.length !== 4) {
-                    throw new Error(`Question ${i+1} must have exactly 4 options`);
+                    throw new Error(`Question ${i + 1} must have exactly 4 options`);
                 }
             });
 
