@@ -6,6 +6,7 @@ import { FaMedal, FaWindowClose, FaCheckSquare } from "react-icons/fa";
 import { MdAttachFile } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { ScaleLoader } from 'react-spinners'
+import { contains } from "validator";
 
 export default function QuizApp() {
     const [lectureNotes, setLectureNotes] = useState("");
@@ -49,6 +50,8 @@ export default function QuizApp() {
 
             const summaryWithMarkup = data.summary;
             const cleanedSummary = summaryWithMarkup
+
+            
                 .replace(/\*\*/g, '') // remove **
                 .split('^')
                 .map(line => line.trim())

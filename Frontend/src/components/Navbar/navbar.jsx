@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const isAuthenticated = !!localStorage.getItem('token');
   const navigate = useNavigate();
-  console.log(isAuthenticated)
+
 
   useEffect(() => {
     const handleScroll = () => {
