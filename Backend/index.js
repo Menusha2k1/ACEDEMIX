@@ -24,6 +24,9 @@ const eventRoutes = require('./Routes/eventRouter');
 //vishmi
 const noteRouter = require('./Routes/noteRouter');
 
+//pramudi
+const stickynoteRouter = require('./Routes/stickynotesRouter');
+
 //menusha
 app.use("/", authRoutes);
 app.use('/api/quiz', quizRoutes);
@@ -34,6 +37,9 @@ app.use('/api/events', eventRoutes)
 
 //vishmi
 app.use('/',noteRouter)
+
+//pramudi
+app.use('/' ,stickynoteRouter);
 
 
 
