@@ -2,14 +2,67 @@ const axios = require('axios');
 require('dotenv').config();
 const Quiz = require('../Models/quiz_model');
 
+const summerizer = async (req, res) => {
+    const { lectureNotes } = req.body;
+
+    try {
+        if (!process.env.DEEPSEEK_API_KEY) {
+            throw new Error("API key not configured in environment variables");
+        }
+
+        const prompt = `Summarize this note into 100-120 words:\n\n${lectureNotes} and
+        add end of the every sentence this mark '^'.`;
+
+        const response = await axios.post(
+            'https://openrouter.ai/api/v1/chat/completions',
+            {
+                model: "qwen/qwen3-0.6b-04-28:free",
+                messages: [
+                    {
+                        role: "system",
+                        content: "Summarize the given notes."
+                    },
+                    {
+                        role: "user",
+                        content: prompt
+                    }
+                ],
+                temperature: 0.3,
+                max_tokens: 3000
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+                    'Content-Type': 'application/json',
+                    'HTTP-Referer': 'http://localhost:3000',
+                    'X-Title': 'summerizer'
+                },
+                timeout: 30000
+            }
+        );
+
+        const summary = response.data?.choices?.[0]?.message?.content;
+        if (!summary) {
+            return res.status(500).json({ error: "Failed to generate summary." });
+        }
+
+        res.status(200).json({ summary });
+
+    } catch (error) {
+        console.error("Summarization failed:", error.message);
+        res.status(500).json({ error: "An error occurred during summarization." });
+    }
+};
+
 const generateQuiz = async (req, res) => {
+
     const { lectureNotes } = req.body;
 
 
 
     try {
         // 1. Verify API Key
-        if (!process.env.DEEPSEEK_API_KEY) {
+        if (!process.env.DEEPSEEK_API_KEY1) {
             throw new Error("API key not configured in environment variables");
         }
 
@@ -52,11 +105,11 @@ const generateQuiz = async (req, res) => {
                 ],
                 temperature: 0.3, // Lower temperature for more consistent results
                 response_format: { type: "json_object" },
-                max_tokens: 6000
+                max_tokens: 3000
             },
             {
                 headers: {
-                    'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+                    'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY1}`,
                     'Content-Type': 'application/json',
                     'HTTP-Referer': 'http://localhost:3000',
                     'X-Title': 'Quiz Generator'
@@ -150,4 +203,4 @@ const generateQuiz = async (req, res) => {
     }
 };
 
-module.exports = { generateQuiz };
+module.exports = { generateQuiz, summerizer };

@@ -31,6 +31,7 @@ const Login = () => {
             });
             if (response.data && response.data.accessToken) {
                 localStorage.setItem('token', response.data.accessToken);
+                localStorage.setItem('name',response.data.email)
                 navigate('/');
                 
              
