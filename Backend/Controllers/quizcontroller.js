@@ -16,7 +16,7 @@ const summerizer = async (req, res) => {
         const response = await axios.post(
             'https://openrouter.ai/api/v1/chat/completions',
             {
-                model: "qwen/qwen3-0.6b-04-28:free",
+                model: "deepseek/deepseek-r1:free",
                 messages: [
                     {
                         role: "system",

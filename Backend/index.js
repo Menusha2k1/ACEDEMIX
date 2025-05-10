@@ -7,7 +7,7 @@ const config = require("./config.json");
 const mongoose = require("mongoose");
 const Note = require("./Models/note.model");
 
-
+const app = express();
 
 mongoose.connect(config.connectionString);
 
@@ -15,9 +15,10 @@ const authRoutes = require("./Routes/userRoutes");
 const quizRoutes = require("./Routes/quizRouter");
 const pdfRoutes = require("./Routes/pdfRouter");
 
+app.use(express.json());
 
 
-const app = express();
+app.use(cors());
 
 app.use('/api/quiz', quizRoutes);
 app.use('/api/convert', pdfRoutes);
@@ -25,10 +26,6 @@ app.use('/api/convert', pdfRoutes);
 
 
 const server = http.createServer(app);
-
-app.use(express.json());
-
-
 
 
 app.get("/", (req, res) => {

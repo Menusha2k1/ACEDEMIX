@@ -4,9 +4,11 @@ import Footer from '../../components/Footer/footer';
 import RichTextEditor from '../../components/RichTextEditor/richtesteditor';
 import VideoFile from '../../assets/notes.mp4'; // Ensure the path is correct
 import { MdAdd } from 'react-icons/md';
+import { useNavigate } from 'react-router-dom';
 
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="font-sans">
       <Navbar />
@@ -40,9 +42,7 @@ const Home = () => {
           {/* Rich text Editor */}
           <RichTextEditor />
         </div>
-        <button className="w-12 h-12 flex items-center justify-center rounded-full bg-blue-500 hover:bg-blue-300 absolute right-28 bottom-63 shadow-lg">
-      <MdAdd className="text-[32px] text-white" />
-    </button>
+     
       </section>
 
       {/* Features Section */}
@@ -52,7 +52,7 @@ const Home = () => {
         
         <div className="grid md:grid-cols-2 gap-10 mt-10">
           {/* Mind Mapping Card */}
-          <div className="p-6 shadow-md rounded-lg bg-gray-100">
+          <div className="p-6 shadow-md rounded-lg bg-gray-100" onClick={() => navigate('/mindmapping')}>
             <h3 className="text-2xl font-semibold">Mind Mapping</h3>
             <p className="text-gray-600 mt-2">Visualize your ideas and structure your thoughts easily.</p>
           </div>

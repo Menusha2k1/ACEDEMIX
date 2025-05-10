@@ -16,12 +16,12 @@ function test() {
     return (
         <div className="">
             <div className="relative bg-blue-300 max-w-full h-180 ">
-            <div className="absolute bg-blue-300 w-400 h-400 rotate-x-120 rounded-full -translate-y-40 -translate-x-10 "></div>
+                <div className="absolute bg-blue-300 w-400 h-400 rotate-x-120 rounded-full -translate-y-40 -translate-x-10 "></div>
 
                 <div className="absolute bg-blue-800 w-500 rotate-155 h-130  transform translate-y-0 translate-x-20 rounded-full "></div>
                 <div className="absolute bg-green-600 w-120 h-120 rounded-full translate-y-30 translate-x-50 "></div>
 
-                <img className="absolute transform translate-y-20 translate-x-50 drop-shadow-2xl" src={Man} alt="" width={450}/>
+                <img className="absolute transform translate-y-20 translate-x-50 drop-shadow-2xl" src={Man} alt="" width={450} />
                 <div className="absolute translate-y-30 w-100  text-wrap translate-x-210 transform text-white mr-2 ">
                     <h1 className="text-5xl mb-2 font-extrabold">SmartRevise</h1>
                     <h3 className="text-2xl mb-2 font-bold">Welcome to SmartRevise</h3>
@@ -35,8 +35,8 @@ function test() {
                 >
 
                     Start Revision
-                    <FaArrowRight 
-                    className="mt-1 ml-1"/>
+                    <FaArrowRight
+                        className="mt-1 ml-1" />
                 </button>
 
 
@@ -47,7 +47,8 @@ function test() {
             {/* Other content here */}
 
             <div ref={targetRef} className="mt-5">
-                <Quiz />      </div>
+                <Quiz />
+            </div>
         </div>
     );
 }
