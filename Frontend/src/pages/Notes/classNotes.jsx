@@ -3,8 +3,10 @@ import Navbar from '../../components/Navbar/navbar';
 import Footer from '../../components/Footer/footer';
 import VideoFile from '../../assets/presentation.mp4'; // Ensure correct file placement
 import {  FaUsers, FaEdit, FaBrain } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Home = () => {
+    const navigate = useNavigate();
   return (
     <div className='font-sans'>
       <Navbar />
@@ -45,7 +47,7 @@ const Home = () => {
               <p className="text-lg text-gray-600 mt-4">Powerful tools to enhance your note-taking experience.</p>
       
               <div className="grid md:grid-cols-3 gap-10 mt-10">
-                <div className="p-6 shadow-md rounded-lg bg-white flex flex-col items-center">
+                <div className="p-6 shadow-md rounded-lg bg-white flex flex-col items-center" onClick={() => navigate('/liveCol')}>
                   <FaUsers className="text-blue-500 text-4xl" />
                   <h3 className="text-2xl font-semibold text-gray-900 mt-2">Live Collaboration</h3>
                   <p className="text-gray-600 mt-2">Work together in real-time with seamless sync.</p>
@@ -55,7 +57,7 @@ const Home = () => {
                   <h3 className="text-2xl font-semibold text-gray-900 mt-2">Rich Text Editing</h3>
                   <p className="text-gray-600 mt-2">Format text, insert images, and style your notes effortlessly.</p>
                 </div>
-                <div className="p-6 shadow-md rounded-lg bg-white flex flex-col items-center">
+                <div className="p-6 shadow-md rounded-lg bg-white flex flex-col items-center" onClick={() => navigate('/mindmapping')}>
                   <FaBrain className="text-purple-500 text-4xl" />
                   <h3 className="text-2xl font-semibold text-gray-900 mt-2">Mind Mapping</h3>
                   <p className="text-gray-600 mt-2">Visualize your ideas with interactive mind maps.</p>
