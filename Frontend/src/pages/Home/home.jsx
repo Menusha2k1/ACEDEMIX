@@ -27,8 +27,8 @@ const Home = () => {
       </div>
       <p className='text-center mt-70 text-4xl font-extrabold'>Our Features</p>
       <div className='mx-auto max-w-md flex items-center justify-center mt-15 mb-20 space-x-8'>
-        <div className='border-2 bg-blue-200 border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
-          <p className='text-lg text-center  font-medium'>LiveNote</p>
+        <div className='border-2 bg-blue-200 border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 ' onClick={() => navigate('/livenote')}>
+          <p className='text-lg text-center  font-medium' >LiveNote</p>
         </div>
         <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
           <p className='text-lg font-medium'>Sticky Notes</p>

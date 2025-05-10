@@ -112,7 +112,7 @@ const Navbar = () => {
           <div>
 
             <button className='btn-primary flex  text-4xl'
-              onClick={() => { navigate('/livenote') }}>note
+              onClick={() => { navigate('/myNotes') }}>note
             </button>
 
             <button className='btn-primary flex  text-4xl gap-2'
