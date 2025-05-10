@@ -25,7 +25,12 @@ const Home = () => {
      <Slider />
       
       </div>
+
+      
       <p className='text-center mt-70 text-4xl font-extrabold'>Our Features</p>
+      <div className="grid gap-4  lg:grid-cols-4">
+        
+      </div>
       <div className='mx-auto max-w-md flex items-center justify-center mt-15 mb-20 space-x-8'>
         <div className='border-2 bg-blue-200 border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
           <p className='text-lg text-center  font-medium'>LiveNote</p>
@@ -48,7 +53,7 @@ const Home = () => {
       </div>
       <div className='bg-blue-200 flex justify-center items-center -translate-x-1/s  '>
         <div>
-          <p className='text-blue-500 mx-auto flex justify-center drop-shadow-2xl w-200 pt-5 text-6xl wrap text-center content-center '>
+          <p className='text-blue-500 font-extrabold mx-auto flex justify-center drop-shadow-2xl w-200 pt-5 text-6xl wrap text-center content-center '>
             Bring your note-taking to the next level with ACEDEMIX
           </p>
           <button className='bg-blue-600 w-50 text-white text-xl p-3 rounded-2xl mt-10 ml-75 hover:opacity-50'>Start Note</button>
