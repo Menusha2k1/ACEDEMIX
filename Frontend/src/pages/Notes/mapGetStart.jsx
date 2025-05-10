@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "../../components/Navbar/navbar";
 import Footer from "../../components/Footer/footer";
-
+import img from '../../assets/pic-banner.webp'
 import { FaUsers, FaEdit, FaProjectDiagram } from "react-icons/fa";
 
 const Home = () => {
@@ -28,7 +28,7 @@ const Home = () => {
         <div className='w-full md:w-1/2 flex justify-center'>
             <img 
                className='w-3/4 border-none outline-none rounded-lg shadow-lg' 
-               src={require('../../assets/pic-banner.webp')}  
+               src={img}  
                alt="Mind Mapping Preview"
             />
         </div>
