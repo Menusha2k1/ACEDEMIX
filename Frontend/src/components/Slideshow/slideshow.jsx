@@ -26,8 +26,8 @@ const ImageCarousel = () => {
         <div className=' items-center justify-center mb-10 flex pt-5 '>
           <img  src={slide1}  />
         </div>
-         <div className='w-100 translate-x-40 items-center justify-center mb-10 flex pt-5 '>
-         
+         <div className='w-120 translate-x-70 items-center justify-center mb-10 flex pt-5 '>
+         <img  src={slide2}  />
         </div>
 
       </Carousel>
