@@ -24,7 +24,7 @@ const Home = () => {
     <div>
       <Navbar />
       <div className="relative bg-blue-300 max-w-full h-120 -translate-y-8">
-        <div className="absolute bg-blue-300 w-400 h-400 rotate-x-104 rounded-full -translate-y-80 -translate-x-10 "></div>
+        <div className="absolute bg-blue-300 w-400 h-400 rotate-x-104 rounded-full transform -translate-y-80 -translate-x-10 "></div>
         <Slider />
 
       </div>
@@ -45,7 +45,7 @@ const Home = () => {
             size={30} />
 
         </div>
-        <div className='bg-blue-200 p-5 rounded-2xl items-center justify-center flex gap-3 hover:border-2 hover:border-blue-900'>
+        <div className='bg-blue-200 p-5 rounded-2xl items-center justify-center flex gap-3 hover:border-2 hover:border-blue-900'onClick={() => navigate('/calender')}>
           Acedemic Reminder
           <BsCalendar2Date
             size={30} />

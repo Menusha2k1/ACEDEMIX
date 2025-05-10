@@ -10,18 +10,30 @@ const Note = require("./Models/note.model");
 const app = express();
 
 mongoose.connect(config.connectionString);
+app.use(express.json());
+app.use(cors());
 
+//menusha
 const authRoutes = require("./Routes/userRoutes");
 const quizRoutes = require("./Routes/quizRouter");
 const pdfRoutes = require("./Routes/pdfRouter");
 
-app.use(express.json());
+//darren
+const eventRoutes = require('./Routes/eventRouter');
 
+//vishmi
+const noteRouter = require('./Routes/noteRouter');
 
-app.use(cors());
-
+//menusha
+app.use("/", authRoutes);
 app.use('/api/quiz', quizRoutes);
 app.use('/api/convert', pdfRoutes);
+
+//darren
+app.use('/api/events', eventRoutes)
+
+//vishmi
+app.use('/',noteRouter)
 
 
 
@@ -32,12 +44,9 @@ app.get("/", (req, res) => {
   res.json({ data: "hello" });
 });
 
-const jwt = require("jsonwebtoken");
-const { authenticateToken } = require("./utilies");
-const { title } = require("process");
 
-//create account
-app.use("/", authRoutes);
+
+
 
 
 
@@ -77,143 +86,12 @@ io.on("connection", async (socket) => {
     console.log("User disconnected:", socket.id);
   });
 });
-//Add Note
-app.post("/add-note", async (req, res) => {
-  const { title, content, tags } = req.body;
-
-  if (!title) {
-    return res.status(400).json({ error: "Title and Content are required  " });
-  }
-
-  if (!content) {
-    return res.status(400).json({ error: "Content is required" });
-  }
-
-  try {
-    const note = new Note({
-      title,
-      content,
-      tags,
-    });
-    await note.save();
-
-    return res.json({
-      error: false,
-      note,
-      message: "Note added successfully",
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-
-});
-
-//Edit Note
-app.put("/edit-note/:noteId", async (req, res) => {
-  const { noteId } = req.params;
-  const { title, content, tags, isPinned } = req.body;
-
-
-  if (!title && !content && !tags) {
-    return res
-      .status(400)
-      .json({ error: "Title is required" });
-  }
-
-  try {
-    const note = await Note.findByIdAndUpdate({
-      _id: noteId
-    });
-
-    if (!note) {
-      return res.status(404).json({ error: "Note not found" });
-    }
-
-    if (title) note.title = title;
-    if (content) note.content = content;
-    if (tags) note.tags = tags;
-    if (isPinned) note.isPinned = isPinned;
-
-    await note.save();
-
-
-    return res.json({
-      error: false,
-      note,
-      message: "Note updated successfully",
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
-
-//Get All Notes
-app.get("/get-all-notes", async (req, res) => {
-  try {
-    const notes = await Note.find({});
-    return res.json({
-      error: false,
-      notes,
-      message: "Notes fetched successfully",
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
-
-//Delete Note
-app.delete("/delete-note/:noteId", async (req, res) => {
-  const { noteId } = req.params;
-
-  try {
-    const note = await Note.findByIdAndDelete({ _id: noteId });
-
-    if (!note) {
-      return res.status(404).json({ error: "Note not found" });
-    }
-
-    return res.json({
-      error: false,
-      message: "Note deleted successfully",
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
-
-//Update isPinned value
-app.put("/update-note-pinned/:noteId", async (req, res) => {
-  const noteId = req.params.noteId;
-  const { isPinned } = req.body;
-
-
-
-  try {
-    const note = await Note.findByIdAndUpdate({ _id: noteId });
-
-    if (!note) {
-      return res.status(404).json({ error: "Note not found" });
-    }
-
-    if (isPinned) note.isPinned = isPinned || false;
-    await note.save();
-
-    return res.json({
-      error: false,
-      note,
-      message: "Note updated successfully",
-    });
-  } catch (error) {
-    return res.status(500).json({ error: error.message });
-  }
-});
 
 // ✅ Start Server on Port 8000
 server.listen(4000, () => console.log("🚀 Server running on port 4000"));
 
 
 
-//app.listen(4000);
 
 
 module.exports = app;

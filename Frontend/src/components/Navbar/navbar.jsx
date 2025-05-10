@@ -7,6 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Navbar = () => {
+        const name = localStorage.getItem('username');
+        console.log(name)
+
+
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -134,6 +138,7 @@ const Navbar = () => {
                 localStorage.removeItem('token');
                 navigate('/login')
               }}>Logout</button>
+              
           </div>
 
         }
