@@ -2,8 +2,8 @@ import React from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // Import carousel styles
 import slide1 from '../../assets/S1.png'; // Import local image
-import slide2 from '../../assets/slide2.png';
 import Man1 from '../../assets/man.png';
+import slide2 from '../../assets/S2.png';
 
 const ImageCarousel = () => {
   // Array of image URLs
@@ -25,7 +25,9 @@ const ImageCarousel = () => {
 
         <div className=' items-center justify-center mb-10 flex pt-5 '>
           <img  src={slide1}  />
-          <p className="text-xl transform -translate-x-10 "></p>
+        </div>
+         <div className='w-100 translate-x-40 items-center justify-center mb-10 flex pt-5 '>
+         
         </div>
 
       </Carousel>
