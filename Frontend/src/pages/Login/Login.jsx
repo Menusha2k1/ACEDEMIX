@@ -31,7 +31,8 @@ const Login = () => {
             });
             if (response.data && response.data.accessToken) {
                 localStorage.setItem('token', response.data.accessToken);
-                navigate('/dashboard');
+                localStorage.setItem('name',response.data.email)
+                navigate('/');
                 
              
                

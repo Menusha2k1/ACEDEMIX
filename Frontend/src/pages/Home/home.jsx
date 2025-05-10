@@ -19,33 +19,27 @@ const Home = () => {
   return (
 
     <div>
-      <Navbar />
-      <div className='bg-blue-300 -translate-x-2 top-0 left-0'></div>
-      <Slider />
-      <p className='text-center mt-10 text-4xl'>Our Features</p>
+       <Navbar />
+      <div className="relative bg-blue-300 max-w-full h-120 -translate-y-8">
+            <div className="absolute bg-blue-300 w-400 h-400 rotate-x-104 rounded-full -translate-y-80 -translate-x-10 "></div>
+     <Slider />
+      
+      </div>
+      <p className='text-center mt-70 text-4xl font-extrabold'>Our Features</p>
       <div className='mx-auto max-w-md flex items-center justify-center mt-15 mb-20 space-x-8'>
-        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
-          <img src={note} alt="" className=' top-7' />
+        <div className='border-2 bg-blue-200 border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
           <p className='text-lg text-center  font-medium'>LiveNote</p>
         </div>
         <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
-          <img src={note} alt="" className=' top-7' />
           <p className='text-lg font-medium'>Sticky Notes</p>
         </div>
         <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
-          <img src={note} alt="" className=' top-7' />
           <p className='text-sm text-center font-medium'>Acedemic Reminder</p>
         </div>
-        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 ' onClick={() => navigate('/quiz')}>
-          <img src={note} alt="" className=' top-7' />
+        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 ' onClick={() => navigate('/test')}>
           <p className='text-xl font-medium text-center' >AI quiz</p>
         </div>
-        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-8 ' onClick={() => navigate('/image-to-text')}>
-          <img src={note} alt="" className=' top-7' />Text Extractor
-        </div>
-        <div className='border-2 bg-white border-gray-300 rounded-3xl hover:border-blue-500 hover:drop-shadow-2xl p-10 '>
-          <img src={note} alt="" className=' top-7' />LiveNote
-        </div>
+  
 
 
 

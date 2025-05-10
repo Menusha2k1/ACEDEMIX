@@ -2,14 +2,67 @@ const axios = require('axios');
 require('dotenv').config();
 const Quiz = require('../Models/quiz_model');
 
-const generateQuiz = async (req, res) => {
-    const {lectureNotes} = req.body;
+const summerizer = async (req, res) => {
+    const { lectureNotes } = req.body;
 
-   
+    try {
+        if (!process.env.DEEPSEEK_API_KEY) {
+            throw new Error("API key not configured in environment variables");
+        }
+
+        const prompt = `Summarize this note into 100-120 words:\n\n${lectureNotes} and
+        add end of the every sentence this mark '^'.`;
+
+        const response = await axios.post(
+            'https://openrouter.ai/api/v1/chat/completions',
+            {
+                model: "qwen/qwen3-0.6b-04-28:free",
+                messages: [
+                    {
+                        role: "system",
+                        content: "Summarize the given notes."
+                    },
+                    {
+                        role: "user",
+                        content: prompt
+                    }
+                ],
+                temperature: 0.3,
+                max_tokens: 3000
+            },
+            {
+                headers: {
+                    'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+                    'Content-Type': 'application/json',
+                    'HTTP-Referer': 'http://localhost:3000',
+                    'X-Title': 'summerizer'
+                },
+                timeout: 30000
+            }
+        );
+
+        const summary = response.data?.choices?.[0]?.message?.content;
+        if (!summary) {
+            return res.status(500).json({ error: "Failed to generate summary." });
+        }
+
+        res.status(200).json({ summary });
+
+    } catch (error) {
+        console.error("Summarization failed:", error.message);
+        res.status(500).json({ error: "An error occurred during summarization." });
+    }
+};
+
+const generateQuiz = async (req, res) => {
+
+    const { lectureNotes } = req.body;
+
+
 
     try {
         // 1. Verify API Key
-        if (!process.env.DEEPSEEK_API_KEY) {
+        if (!process.env.DEEPSEEK_API_KEY1) {
             throw new Error("API key not configured in environment variables");
         }
 
@@ -17,18 +70,18 @@ const generateQuiz = async (req, res) => {
         const prompt = `Generate exactly 10 multiple choice questions in JSON format based on these prompt:
         ${lectureNotes}
 
-        Return ONLY this exact JSON format with NO additional text or Markdown:
-        {
-          "title": " ... ",
-          "questions": [
-            {
-              "question": "...",
-              "options": ["A. Option1", "B. Option2", "C. Option3", "D. Option4"],
-              "answer": "A",
-              "explanation": "..."
-            }
-          ]
-        }`;
+        Return ONLY this exact JSON format with NO additional text or Markdown:keep the jason headers as it is
+                {
+            "title": "Quiz Title",
+            "questions": [
+                {
+                "question": "Question text?",
+                "options": ["A. Option1", "B. Option2", "C. Option3", "D. Option4"],
+                "answer": "A",
+                "explanation": "Detailed explanation"
+                }
+            ]
+            }`;
 
         // 3. Make the API request
         const response = await axios.post(
@@ -36,27 +89,27 @@ const generateQuiz = async (req, res) => {
             {
                 model: "deepseek/deepseek-r1:free",
                 messages: [
-                    { 
-                        role: "system", 
-                        content: `You are a JSON quiz generator. STRICTLY return ONLY the requested JSON object with:
+                    {
+                        role: "system",
+                        content: `content: ... Return ONLY valid JSON with a "questions" array key (not "question") ...
                         - Exactly 10 questions
                         - No additional commentary
                         - No Markdown formatting
                         - Valid JSON syntax
                         - All fields completed`
                     },
-                    { 
-                        role: "user", 
-                        content: prompt 
+                    {
+                        role: "user",
+                        content: prompt
                     }
                 ],
                 temperature: 0.3, // Lower temperature for more consistent results
                 response_format: { type: "json_object" },
-                max_tokens: 6000
+                max_tokens: 3000
             },
             {
                 headers: {
-                    'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY}`,
+                    'Authorization': `Bearer ${process.env.DEEPSEEK_API_KEY1}`,
                     'Content-Type': 'application/json',
                     'HTTP-Referer': 'http://localhost:3000',
                     'X-Title': 'Quiz Generator'
@@ -78,7 +131,7 @@ const generateQuiz = async (req, res) => {
         if (rawContent.includes('```json')) {
             const jsonMatch = rawContent.match(/```json([\s\S]*?)```/);
             if (jsonMatch) jsonString = jsonMatch[1].trim();
-        } 
+        }
         // Extract JSON from text if needed
         else if (!rawContent.trim().startsWith('{')) {
             const jsonStart = rawContent.indexOf('{');
@@ -92,11 +145,11 @@ const generateQuiz = async (req, res) => {
         let quizData;
         try {
             quizData = JSON.parse(jsonString);
-            
+
             if (!quizData.questions || !Array.isArray(quizData.questions)) {
                 throw new Error("Missing questions array in response");
             }
-            
+
             if (quizData.questions.length !== 10) {
                 throw new Error(`Expected 10 questions, got ${quizData.questions.length}`);
             }
@@ -104,10 +157,10 @@ const generateQuiz = async (req, res) => {
             // Validate each question
             quizData.questions.forEach((q, i) => {
                 if (!q.question || !q.options || !q.answer || !q.explanation) {
-                    throw new Error(`Question ${i+1} missing required fields`);
+                    throw new Error(`Question ${i + 1} missing required fields`);
                 }
                 if (q.options.length !== 4) {
-                    throw new Error(`Question ${i+1} must have exactly 4 options`);
+                    throw new Error(`Question ${i + 1} must have exactly 4 options`);
                 }
             });
 
@@ -150,4 +203,4 @@ const generateQuiz = async (req, res) => {
     }
 };
 
-module.exports = { generateQuiz };
+module.exports = { generateQuiz, summerizer };

@@ -8,15 +8,18 @@ const mongoose = require("mongoose");
 const Note = require("./Models/note.model");
 
 
-mongoose.connect(config.connectionString)
-      .then(() => console.log("✅ MongoDB Connected"))
-      .catch((error) => console.error("❌ MongoDB Connection Failed!", error));
+
 
 const authRoutes = require("./Routes/userRoutes");
-const quizRoutes = require("./Routes/quizRouter")
+const quizRoutes = require("./Routes/quizRouter");
+const pdfRoutes = require("./Routes/pdfRouter");
 
 
 
+
+
+app.use('/api/quiz', quizRoutes);
+app.use('/api/convert', pdfRoutes);
 
 
 const app = express();
@@ -38,6 +41,7 @@ const { title } = require("process");
 
 //create account
 app.use("/", authRoutes);
+
 
 
 // ✅ Setup Socket.io for Real-Time Collaboration
@@ -206,5 +210,8 @@ app.post("/add-note", async (req, res) => {
   server.listen(8000, () => console.log("🚀 Server running on port 8000"));
   
   
+
+app.listen(4000);
+
 
 module.exports = app;
