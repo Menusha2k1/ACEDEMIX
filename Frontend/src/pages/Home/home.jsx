@@ -1,12 +1,9 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/navbar'
-import Abs from '../../assets/notes.jpg'
 import pic from '../../assets/pic1.png'
 import pic2 from '../../assets/pic2.png'
 import pic4 from '../../assets/pic4.png'
-import note from '../../assets/notes.png'
-import sticky from '../../assets/sticky.png'
-import calender from '../../assets/calender.png'
+
 import pic3 from '../../assets/pic3.png'
 import Footer from '../../components/Footer/footer'
 import Slider from '../../components/Slideshow/slideshow'
@@ -35,7 +32,7 @@ const Home = () => {
 
       <p className='text-center mt-70 text-4xl font-extrabold'>Our Features</p>
       <div className=" gap-6 lg:grid-cols-4 justify-center items-center grid mx-30 mt-10 mb-30 font-bold text-xl text-blue-900">
-        <div className='bg-blue-200 p-5 rounded-2xl items-center justify-center flex gap-3 hover:border-2 hover:border-blue-900'>
+        <div className='bg-blue-200 p-5 rounded-2xl items-center justify-center flex gap-3 hover:border-2 hover:border-blue-900'onClick={() => navigate('/livenote')}>
           Live Note
           <LuNotebookPen
             size={30}
@@ -62,7 +59,7 @@ const Home = () => {
 
         </div>
       </div>
-      <div className='bg-blue-200 flex justify-center items-center -translate-x-1/s  '>
+      <div className='bg-blue-200 flex justify-center items-center -translate-x-1'>
         <div>
           <p className='text-blue-500 font-extrabold mx-auto flex justify-center drop-shadow-2xl w-200 pt-5 text-6xl wrap text-center content-center '>
             Bring your note-taking to the next level with ACEDEMIX

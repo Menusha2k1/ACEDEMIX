@@ -28,7 +28,7 @@ import {
 } from "react-icons/fa";
 
 // ✅ Connect to Socket.io backend
-const socket = io("http://localhost:8000");
+const socket = io("http://localhost:4000");
 
 const liveColEditor = () => {
   const editor = useEditor({

@@ -9,6 +9,7 @@ const Note = require("./Models/note.model");
 
 
 
+mongoose.connect(config.connectionString);
 
 const authRoutes = require("./Routes/userRoutes");
 const quizRoutes = require("./Routes/quizRouter");
@@ -16,13 +17,13 @@ const pdfRoutes = require("./Routes/pdfRouter");
 
 
 
-
+const app = express();
 
 app.use('/api/quiz', quizRoutes);
 app.use('/api/convert', pdfRoutes);
 
 
-const app = express();
+
 const server = http.createServer(app);
 
 app.use(express.json());
@@ -207,11 +208,11 @@ app.post("/add-note", async (req, res) => {
   });
   
   // ✅ Start Server on Port 8000
-  server.listen(8000, () => console.log("🚀 Server running on port 8000"));
+  server.listen(4000, () => console.log("🚀 Server running on port 8000"));
   
   
 
-app.listen(4000);
+//app.listen(4000);
 
 
 module.exports = app;
