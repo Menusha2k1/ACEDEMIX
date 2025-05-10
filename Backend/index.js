@@ -3,10 +3,16 @@ require("dotenv").config();
 const config = require("./config.json");
 const mongoose = require("mongoose");
 
-mongoose.connect(config.connectionString);
+try{
+    mongoose.connect(config.connectionString);
+
+}catch{
+
+}
 
 const authRoutes = require("./Routes/userRoutes");
-const quizRoutes = require("./Routes/quizRouter")
+const quizRoutes = require("./Routes/quizRouter");
+const pdfRoutes = require("./Routes/pdfRouter");
 
 
 const express = require("express");
@@ -17,6 +23,7 @@ const cors = require("cors");
 app.use(cors());
 
 app.use('/api/quiz', quizRoutes);
+app.use('/api/convert', pdfRoutes);
 
 
 app.use(express.json());

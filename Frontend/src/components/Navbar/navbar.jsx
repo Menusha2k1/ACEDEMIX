@@ -1,6 +1,6 @@
 import React, { useState, useEffect  } from 'react';
 import { FaBars, FaChevronDown, FaTimes } from 'react-icons/fa';
-import { IoPencil } from "react-icons/io5";
+import { LuNotebookPen } from "react-icons/lu";
 import { Link } from 'react-router-dom';
 import {useNavigate } from 'react-router-dom';
 
@@ -8,10 +8,22 @@ import {useNavigate } from 'react-router-dom';
 const Navbar = () => {
   const [isProductsOpen, setIsProductsOpen] = useState(false);
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const isAuthenticated = !!localStorage.getItem('token');
   const navigate = useNavigate();
+console.log(isAuthenticated)
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const offset = window.scrollY;
+      setScrolled(offset > 50); // Change 50 to control when it triggers
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
   
 
   // Toggle dropdown visibility
@@ -23,8 +35,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-white flex items-center justify-between px-3 py-2 drop-shadow fixed top-0 right-0 left-0 z-1 pl-20 pr-20">
-      <div className="text-2xl font-medium text-black py-2 drop-shadow ">
+    <div className={`focus:bg-amber-50 flex items-center justify-between px-3 py-2  fixed top-0 right-0 left-0 z-1 pl-20 pr-20 ${scrolled ? ' shadow-md backdrop-blur-lg' : 'bg-transparent'}`}>
+      <div className="text-2xl font-medium text-blue-900 py-2 drop-shadow ">
         <h1>ACEDEMIX</h1>    
       </div>
 
@@ -36,9 +48,9 @@ const Navbar = () => {
       </div>
 
       {/* Nav Items Section */}
-      <div className="hidden md:flex items-center space-x-8">
+      <div className=" hidden md:flex items-center space-x-8 text-blue-900 ">
         <ul className="flex space-x-6">
-          <Link to='/dashboard'>
+          <Link to='/'>
           <li className="text-base font-medium hover:text-blue-500 cursor-pointer">Home</li>
           
           </Link>
@@ -92,12 +104,11 @@ const Navbar = () => {
       <div className='flex space-x-3'>
 
        {!isAuthenticated? 
-        <button className='btn-primary flex  text-4xl'
+        <button className='btn-primary flex  text-4xl gap-2'
         onClick={() => { navigate('/login')}}>
       Start Note
-      <IoPencil 
-      size={20}
-      className='space-x-4'/>
+      <LuNotebookPen 
+      size={20}/>
 
     </button>
        :
