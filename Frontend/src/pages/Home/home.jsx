@@ -40,6 +40,7 @@ const Home = () => {
           <LuNotebookPen
             size={30}
           />
+
         </div>
         <div className='bg-blue-200 p-5 rounded-2xl items-center justify-center flex gap-3 hover:border-2 hover:border-blue-900'>
           Sticky Notes
